@@ -1,14 +1,18 @@
 {
-  "name": "websmurf/laravel-cassandra",
+  "name": "gperosio/laravel-cassandra",
   "description": "Cassandra wrapper for Laravel/Lumen",
   "keywords": ["cassandra"],
-  "homepage": "https://github.com/websmurf/laravel-cassandra",
+  "homepage": "https://github.com/gperosio/laravel-cassandra",
   "license": "MIT",
   "authors": [
     {
       "name": "Adam van Dongen",
       "email": "adam@bandhosting.nl"
-    }
+  },
+  {
+    "name": "Gerardo Perosio",
+    "email": "gperosio@gmail.com"
+  }
   ],
   "require": {
     "php": ">=5.5.0",
