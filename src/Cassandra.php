@@ -38,8 +38,33 @@ class Cassandra
             $builder->withDefaultConsistency($defaultConsistency);
         }
 
+        $timeout = config('cassandra.withDefaultTimeout');
+        if ( ! empty($timeout)) {
+            $builder->withDefaultTimeout($timeout);
+        }
+
+        $connect_timeout = config('cassandra.withConnectTimeout');
+        if ( ! empty($connect_timeout)) {
+            $builder->withConnectTimeout($connect_timeout);
+        }
+
+        $policy = config('cassandra.policy');
+        $whitelist = config('cassandra.whitelist');
+        if ($policy == 'whitelist' && ! empty($whitelist)) {
+            if (is_array($whitelist))
+                $whitelist = implode(',', $whitelist);
+            $builder->withWhiteListHosts($whitelist);
+        }
+
+        $protocol = config('cassandra.withProtocolVersion');
+        if ( ! empty($protocol)){
+            $builder->withProtocolVersion((int)$protocol);
+        }
         // Set contact end points
-        call_user_func_array([ $builder, "withContactPoints" ], config('cassandra.contactpoints'));
+        $seed = config('cassandra.contactpoints');
+        if (is_array($seed))
+            $seed = implode(',', $seed);
+        $builder->withContactPoints($seed);
 
         // Connect to cluster
         $this->cluster = $builder->build();
